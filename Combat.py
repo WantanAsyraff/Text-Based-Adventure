@@ -29,40 +29,54 @@ CombatMode = True
 
 
 def EnemyTurn():
+    global CombatMode
+
     if Player["HP"] <= 0:
         PlayerDeath()
-        breakpoint
-    else:
-        print(f"{Enemy['NAME']} turn to attack")
-        TotalAttack = Player["HP"]
-        
-        TotalAttack = (Player["HP"] - (Enemy["ATTACK"] - Player["DEF"]))
-        Player["HP"] - TotalAttack
-        time.sleep(1)
-        print(f"{PartnerName} got hurt! Damage: {TotalAttack}")
-        
-        if Player["HP"] <= 0:
-            PlayerDeath()
-            breakpoint
-        
+        return
+
+    time.sleep(1)
+    print(f"{Enemy['NAME']}'s turn to attack")
+    ETotalAttack = max(0, Enemy["ATTACK"] - Player["DEF"])
+    Player["HP"] -= ETotalAttack
+    time.sleep(1)
+    print(f"{PartnerName} got hurt! Damage: {ETotalAttack}")
+
+    if Player["HP"] <= 0:
+        PlayerDeath()
 
 
 def PlayerTurn():
-    if Enemy["HP"] < 1:
+    global CombatMode
+
+    if Enemy["HP"] <= 0:
         EnemyDeath()
-        breakpoint
-    else:
-        print(f"{PartnerName} turn to attack")
-        TotalAttack = Enemy["HP"]
-        
-        TotalAttack = (Enemy["HP"] - (Damage - Enemy["DEF"])) 
-        Enemy["HP"] -= TotalAttack
-        time.sleep(1)
-        print(f"{Enemy['NAME']} got hurt! Damage: {TotalAttack}")
-        
-        if Enemy["HP"] <= 0:
-            PlayerDeath()
-            breakpoint
+        return
+
+    time.sleep(1)
+    print(f"{PartnerName}'s turn to attack")
+    PTotalAttack = max(0, Damage - Enemy["DEF"])
+    Enemy["HP"] -= PTotalAttack
+    time.sleep(1)
+    print(f"{Enemy['NAME']} got hurt! Damage: {PTotalAttack}")
+
+    if Enemy["HP"] <= 0:
+        EnemyDeath()
+
+def EnemyDeath():
+    global CombatMode
+
+    if CombatMode:
+        print(f"{Enemy['NAME']} enemy decommissioned.")
+        CombatMode = False
+
+
+def PlayerDeath():
+    global CombatMode 
+    
+    if CombatMode:
+        print(f"{PartnerName} lost contact")
+        CombatMode = False
 
 
 def EnemyDeath():
@@ -86,19 +100,17 @@ def CombatAttack():
     if Player["HP"] > 0:
         PlayerTurn()
     
-    elif Player["HP"] < 1 : #Incorporate SPEED CHECK HERE
+    elif Player["HP"] < 1:  # Incorporate SPEED CHECK HERE
         PlayerDeath()
-        CombatMode = False
-        breakpoint
         
+    if not CombatMode:  # Check if combat should continue
+        return  # Exit the function if combat ended
 
     if Enemy["HP"] > 0:
         EnemyTurn()
         
     elif Enemy["HP"] < 1:
         EnemyDeath()
-        CombatMode = False
-        breakpoint
 
     CombatChoice()
         
@@ -331,36 +343,38 @@ def CombatActions():
         CombatChoice()
 
 
-def Combat(): # ROOT COMBAT FUNCTION
+def Combat():
     global CombatMode
-    
-    while CombatMode:
 
+    while CombatMode:
         PChoice = input(">>> ")
-        
+
         if PChoice.lower() == "attack":
-            
             if Enemy["HP"] > 0:
                 CombatAttack()
-            elif Enemy["HP"] < 1:
-                break
-            
+            else:
+                continue  # Continue the game loop
+
         elif PChoice.lower() == "status":
             CombatStatus()
-        
+
         elif PChoice.lower() == "inventory":
             print("FUNCTION COMING SOON!")
-        
+
         elif PChoice.lower() == "actions":
             CombatActions()
-        
+
         else:
             print(f"{PartnerName}: I don't understand... Give me a proper order.")
-            CombatChoice()
+
+        if not CombatMode:
+            break  # Exit the loop when CombatMode is False
+
 # Call the Combat function to start the combat
 
-if CombatMode == True:
-    print(Enemy['NAME'], "Emerges.")
-    if Player["HP"] > 0 or Enemy > 0:
-        CombatChoice()
-        Combat()
+while CombatMode and Player["HP"] > 0 and Enemy["HP"] > 0:
+    print(f"{Enemy['NAME']} Emerges.")
+    CombatChoice()
+    Combat()  # End the game loop
+
+print("Combat ended.")
