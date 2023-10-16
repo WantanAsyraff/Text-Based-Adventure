@@ -17,7 +17,7 @@ def Loot():
     print("Partner: Don't mind if I do...")
     time.sleep(1)
 
-    Rejuvinators = random.randrange(0, 3)  # Change the range to include 3 as well
+    Rejuvinators = random.randint(0, 3)  # Change the range to include 3 as well
     from RoamMode import Player
 
     if Rejuvinators == 0:
@@ -34,24 +34,27 @@ def Loot():
         print("SPEED increased!")
     
     time.sleep(1)
+    breakpoint
 
 
 def EnemyEncounter():
+
     global CombatMode
-    
     CombatMode = True
 
 def RandomEvent():
     
-    ChooseEvent = random.randrange(0, 1)
+    ChooseEvent = random.choice(EventList)
     
-    if ChooseEvent == EventList[0]:
+    if ChooseEvent == "Enemy Encounter":
         print("Enemy Encounter")
         EnemyEncounter()
     
-    if ChooseEvent == EventList[1]:
+    elif ChooseEvent == "Loot":
         print("Loot")
         Loot()
         
-    if ChooseEvent == EventList[2]:
+    elif ChooseEvent == "Trap":
         print("Trap")
+
+RandomEvent()
