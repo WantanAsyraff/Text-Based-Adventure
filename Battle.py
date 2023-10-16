@@ -5,7 +5,7 @@ from RoamMode import Player
 # NOTICE: I KNOW THAT THIS CODE COULD BE USED BETTER IF I ALSO USED LIST ESPECIALLY FOR THE COMMANDS & ACTIONS. BUT,
 # I'M WORKING WITH WHAT WORKS FOR NOW LOL!
 # ENEMY WILL ENHERIT FROM STATS
-
+CombatMode = True 
 
 PartnerName = "Partner" # ASK THIS QUESTION IN THE STORY FILE LATER
 PlayerName = "You"
@@ -19,8 +19,6 @@ PlayerRoll = 0
 PChoice = ""
 EnemyInfo = 0
 EnemyUpdate = {}
-
-CombatMode = True 
 
 from EventHandler import Enemy
 

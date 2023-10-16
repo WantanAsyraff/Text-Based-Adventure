@@ -2,9 +2,9 @@ import EncounterSelect
 import random
 import time
 
-
 EventList = ["EnemyEncounter", "Loot", "Trap"]
-
+Enemy = EncounterSelect.Enemy
+CombatMode = False
 
 def Loot():
 
@@ -36,27 +36,22 @@ def Loot():
     time.sleep(1)
 
 
-Enemy = EncounterSelect.Enemy
-
 def EnemyEncounter():
-    global Enemy
+    global CombatMode
     
-    Enemy = EncounterSelect.Enemy
-    
-    import Battle
-    Battle.CombatMode = True
+    CombatMode = True
 
 def RandomEvent():
     
     ChooseEvent = random.randrange(0, 1)
     
-    if ChooseEvent == 0:
+    if ChooseEvent == EventList[0]:
         print("Enemy Encounter")
         EnemyEncounter()
     
-    if ChooseEvent == 1:
+    if ChooseEvent == EventList[1]:
         print("Loot")
         Loot()
         
-    if ChooseEvent == 2:
+    if ChooseEvent == EventList[2]:
         print("Trap")
