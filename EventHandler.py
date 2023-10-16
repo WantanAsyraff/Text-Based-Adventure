@@ -2,35 +2,39 @@ import EncounterSelect
 import random
 import time
 
+
 EventList = ["EnemyEncounter", "Loot", "Trap"]
 
 
 def Loot():
+
     print("-------------------------------------------------------------||")
     time.sleep(1)
-    print(f"Partner: I found a some loot under some debris...")
+    print("Partner: I found some loot under some debris...")
     time.sleep(1)
-    print(f"Partner: would you look at that, a rejuvinator.")
+    print("Partner: Would you look at that, a rejuvenator.")
     time.sleep(1)
-    print(f"Partner: Don't mind if I do...")
+    print("Partner: Don't mind if I do...")
     time.sleep(1)
-    
-    from Battle import Player
-    Rejuvinators = random.randrange(0, 3)
-    
+
+    Rejuvinators = random.randrange(0, 3)  # Change the range to include 3 as well
+    from RoamMode import Player
+
     if Rejuvinators == 0:
-        Player["HP"] += random.randrange(6, 15)
+        Player['HP'] += random.randint(6, 16)
         print("HP increased!")
-        
     elif Rejuvinators == 1:
-        Player["DEF"] += random.randrange(2, 6)
+        Player['DEF'] += random.randint(6, 16)
         print("DEF increased!")
     elif Rejuvinators == 2:
-        Player["SPEED"] += 4
-        print("SPEED increased!")
-    elif Rejuvinators == 3:
-        Player["ATTACK"] += random.randrange(4, 10)
+        Player['ATTACK'] += 4
         print("ATTACK increased!")
+    elif Rejuvinators == 3:
+        Player['SPEED'] += random.randint(6, 16)
+        print("SPEED increased!")
+    
+    time.sleep(1)
+
 
 Enemy = EncounterSelect.Enemy
 
@@ -56,4 +60,3 @@ def RandomEvent():
         
     if ChooseEvent == 2:
         print("Trap")
-        
