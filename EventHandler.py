@@ -48,7 +48,7 @@ def EnemyEncounter():
 
 def RandomEvent():
     
-    ChooseEvent = 1 #random.randrange(0, 1)
+    ChooseEvent = random.randrange(0, 1)
     
     if ChooseEvent == 0:
         print("Enemy Encounter")
