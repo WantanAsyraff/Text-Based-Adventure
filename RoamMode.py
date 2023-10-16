@@ -8,15 +8,21 @@ Player = Stats.CAT # PLACEHOLDER, WILL INHERET FROM PERSONALITY QUIZ ONCE COMPLE
 Steps = 0
 EventRate = 0.1
 EventOccurence = 0.5
+Progress = 30
 
 Floors = ["Level 0: Ground Floor", "Level 1: Basement", "Level 2: Hidden Laboratory", "Level 3: Confidential Experimental Department",
           "Level 4: Control Room", "Level 5: War Preparations Room"]
 
-print("-------------------------------------------------------------||")
-print(f"You are currently on {Floors[0]}")
-print("-------------------------------------------------------------||")
+def FloorStatus():
+    print("-------------------------------------------------------------||")
+    time.sleep(1)
+    print(f"You are currently on {Floors[0]}")
+    print("-------------------------------------------------------------||")
+    time.sleep(1)
 
-while Steps <= 30:
+FloorStatus()
+
+while Steps < Progress:
     
     print("-------------------------------------------------------------||")
     print(f"Current steps: {Steps} \nType 'walk' to advance")
@@ -42,6 +48,7 @@ while Steps <= 30:
             EventHandler.RandomEvent()
             EventRate = 0.1
             print(f"resetted the event rate: {EventRate}")
+            breakpoint
     
     
     else:
@@ -49,3 +56,5 @@ while Steps <= 30:
         print("-------------------------------------------------------------||")
         
 print("Out of the loop!")
+Progress += 30
+print(Progress)

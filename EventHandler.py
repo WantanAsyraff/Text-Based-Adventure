@@ -56,5 +56,3 @@ def RandomEvent():
         
     elif ChooseEvent == "Trap":
         print("Trap")
-
-RandomEvent()
