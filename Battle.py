@@ -2,7 +2,6 @@ import random
 import time
 #import PersonalityQuiz
 import Stats
-import EventHandler
 # NOTICE: I KNOW THAT THIS CODE COULD BE USED BETTER IF I ALSO USED LIST ESPECIALLY FOR THE COMMANDS & ACTIONS. BUT,
 # I'M WORKING WITH WHAT WORKS FOR NOW LOL!
 # ENEMY WILL ENHERIT FROM STATS
@@ -11,8 +10,6 @@ Player = Stats.CAT # PLACEHOLDER, WILL INHERET FROM PERSONALITY QUIZ ONCE COMPLE
 
 PartnerName = "Partner" # ASK THIS QUESTION IN THE STORY FILE LATER
 PlayerName = "You"
-
-Enemy = EventHandler.Enemy
 
 
 Damage = (Player["ATTACK"] + (Player["ATTACK"] * Player["WEAPONS MASTERY"]))
@@ -26,6 +23,7 @@ EnemyUpdate = {}
 
 CombatMode = True 
 
+from EventHandler import Enemy
 
 
 def EnemyTurn():
@@ -274,8 +272,6 @@ def Retreat():
     else:
         print(f"{PartnerName} Dang it, the enemy blocked me!")
         EnemyTurn()
-
-    PlayerTurn()
 
 
 def Hit_and_Run():
