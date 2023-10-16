@@ -45,23 +45,24 @@ FOX ={
 
 #RABBIT AND BEAR WILL NOT BE IN THE FINAL PRODUCT. TO SAVE TIME FROM CODING MORE INDIVIDUAL STATS.
 
-RABBIT ={
-    "HP" : 10,
-    "DEF" : 5,
-    "ATTACK" : 20,
-    "SPEED" : 50,
-    "ACTIONS" : 0.6,
-    "WEAPONS MASTERY" : 0.3
-}
+# RABBIT ={
+#     "HP" : 10,
+#     "DEF" : 5,
+#     "ATTACK" : 20,
+#     "SPEED" : 50,
+#     "ACTIONS" : 0.6,
+#     "WEAPONS MASTERY" : 0.3
+# }
 
-BEAR ={
-    "HP" : 35,
-    "DEF" : 20,
-    "ATTACK" : 30,
-    "SPEED" : 10,
-    "ACTIONS" : 0.1,
-    "WEAPONS MASTERY" : 0.7
-}
+# BEAR ={
+#     "HP" : 35,
+#     "DEF" : 20,
+#     "ATTACK" : 30,
+#     "SPEED" : 10,
+#     "ACTIONS" : 0.1,
+#     "WEAPONS MASTERY" : 0.7
+# }
+
 
 WORKER_DROID ={
     "NAME" : "WORKER DROID",
