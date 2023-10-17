@@ -35,7 +35,7 @@ def Roaming():
         
         elif PChoice.lower() == "walk":
             Steps += 1
-            EventRate += random.uniform(0.05, 0.10)
+            EventRate += random.uniform(0.05, 0.11)
             EventRate = round(EventRate, 2)
             
             print("-------------------------------------------------------------||")
@@ -46,12 +46,16 @@ def Roaming():
             print(EventRate)
             
             if EventRate > EventOccurence:
+
                 EventHandler.RandomEvent()
 
-                if EventHandler.RandomEvent() == 1:
-                    EventHandler.Loot()
-                    print(EventHandler.Loot)
-                    
+                if EventHandler.RandomEvent() == 0:
+                    print("Enemy")
+
+                elif EventHandler.RandomEvent() == 1:
+                    HP, DEF, ATTACK, SPEED = EventHandler.Loot() # Assign the returned values to variables
+
+                
                 EventRate = 0.1
                 print(f"resetted the event rate: {EventRate}")
     else:
