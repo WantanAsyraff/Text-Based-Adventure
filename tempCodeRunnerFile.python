@@ -1,0 +1,32 @@
+# Translator test
+
+text = input("Insert text: ")
+
+# Pronouns
+Person_pronouns = {
+    "I" and "he": "Nya",
+    "he": "Nya",
+    "she": "Nya",
+    "we": "Nyawi",
+    "they": "Nyawi",
+    "it": "Nyawi",
+                   }
+
+# Singular Pronouns
+FirstPerson_Singular_pronouns = ["Nya", "nyi", "nyu", "nye", "nyom"]
+SecondPerson_Singular_pronouns = ["nya", "nyar", "nyass","ngasm"]
+
+# Plural Personal Pronouns
+FirstPerson_Plural_pronouns = ["nyam", "nyim", "nyum", "nyem", "ngom"]
+SecondPerson_Plural_pronouns = ["nya", "nyar", "nyass","ngasm"]
+
+# Reflexive Pronouns
+Reflexive_Singular_pronouns = ["himself", "herself", "myself"]
+Reflexive_Plural_pronouns = ["ourselves", "themselves", "itself"]
+
+ReplacedPronouns = [Person_pronouns.get(char, char) for char in text]
+
+
+
+res = "".join(ReplacedPronouns)
+print("Meowi translated: " + res)
