@@ -17,10 +17,31 @@ class Player:
         self.spellbook = spellbook  # Dictionary of spells
         self.inventory = inventory  # Dictionary of items
 
-    def spellcast(self):
-        print("\n📖 Which spell do you wish to conjure?\n")
+    def spellcast(self, enemy):
+        print(f"\n📖 Which spell do you wish to conjure?\nTarget: {enemy}")
         for idx, (spell, desc) in enumerate(self.spellbook.items(), 1):
             print(f" [{idx}] {spell} — {desc[0]} \n     Damage: {desc[1]}\n     Mana Cost: {desc[2]}")
+
+        while True:
+            try:
+                spellcasted = int(input("Spell Index: "))
+                
+                if 1 <= spellcasted <= len(self.spellbook):
+                    
+                    spell_keys = list(self.spellbook.keys())
+                    chosen_spell = spell_keys[spellcasted - 1]
+                    spell_info = self.spellbook[chosen_spell]
+                    
+                    print(f">> You're casting: {chosen_spell}")
+                    if self.mana < codex_of_the_fools_spellblades[chosen_spell][2]:
+                        print("You don't have the energy to cast this it.")
+                    else:
+                        print(f"You sucessfully casted {chosen_spell}")
+
+            except ValueError:
+                print("Invalid input, use integers.")
+            except SyntaxError:
+                print("Invalid input, use integers.")
 
     def use_item(self):
         print("\n🎒 Which item do you wish to use?\n")
@@ -49,5 +70,4 @@ messenger_bag = {
     
 }
 amal_fakhri = Player("Amal Fakhri", "Researcher of Magis Al-Zalam", "There's no shame in obtaining knowledge.", "Magis AlNur-Walzalam", 200, 50, 75, 300, codex_of_the_fools_spellblades, messenger_bag)
-amal_fakhri.spellcast()
-amal_fakhri.use_item()
+amal_fakhri.spellcast("Opps")
