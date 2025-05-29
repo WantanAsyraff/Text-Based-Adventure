@@ -1,3 +1,5 @@
+from player import Player
+
 class Battle:
     def __init__(self, player, enemy, inventory):
         self.player = player
@@ -9,7 +11,7 @@ class Battle:
             "Spellcast": lambda: self.player.spellcast(self.enemy)
             "Use an Item": lambda: self.player.useItem()
             "Check Environment": lambda: self.player.checkEnvironment()
-            "Converse with Opponent": lambda:  self.player.converseOpponent(self.enemy)
+            "Converse with Opponent": lambda: self.player.converseOpponent(self.enemy)
         }
     
     def attack(self):
