@@ -15,14 +15,20 @@ class Battle:
             "Converse with Opponent": lambda: self.player.converseOpponent(self.enemy)
         }
         
-        idx = 1
-        for action in options.keys():
+        action_key = list(options.keys())
+        
+        print("Your options:")
+        for idx, action in enumerate(options.keys(), 1):
             print(f"[{idx}] {action}")
-            idx += 1
         
         print(f"--------------------------")
         try:
-            action = int(input(">> Your turn, what will you do?\n>> "))
+            choice = int(input(">> Your turn, what will you do?\n>> "))
+            
+            if 1 <= choice <= len(action_key):
+                chosen_action = action_key[choice-1]
+                print(f"\n>> You chose: {chosen_action}")
+                options[chosen_action]()
         except ValueError:
             print(f"Invalid input, choose from [1-{idx}].")
         except SyntaxError:
