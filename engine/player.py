@@ -34,10 +34,13 @@ class Player:
                     
                     print(f">> You're casting: {chosen_spell}")
                     if self.mana < codex_of_the_fools_spellblades[chosen_spell][2]:
-                        print("You don't have the energy to cast this it.")
+                        print(">> You don't have the energy to cast this it.")
                     else:
-                        print(f"You sucessfully casted {chosen_spell}")
-
+                        
+                        self.mana -= self.spellbook[chosen_spell][2]
+                        #attack enemy line
+                        print(f">> You sucessfully casted {chosen_spell}")
+                        #return dmg to enemy
             except ValueError:
                 print("Invalid input, use integers.")
             except SyntaxError:
@@ -47,6 +50,19 @@ class Player:
         print("\n🎒 Which item do you wish to use?\n")
         for idx, (item, desc) in enumerate(self.inventory.items(), 1):
             print(f" [{idx}] {item} — {desc}")
+            
+        while True:
+            try:
+                choose_item = int(input("Item Index: "))
+                
+                if 1 <= choose_item <= len(self.inventory):
+                    item_keys = list(self.inventory.keys())
+                    chosen_item = item_keys[choose_item - 1]
+                    item_info = self.inventory[chosen_item]
+            except ValueError:
+                print("Invalid input, use integers.")
+            except SyntaxError:
+                print("Invalid input, use integers.")
 
     def check_environment(self):
         print("\n🌿 You take a moment to observe your surroundings...\n")
@@ -64,6 +80,7 @@ codex_of_the_fools_spellblades = {
     "Waltz Of Ignorances": ["Send a flurry of stabs using a rapier.", 30, 15, ]
 }    
 messenger_bag = {
+    # Item, dec, quantity, healing, damage(enemy), damage(player), 
     "Pocket Watch": "The night is still young.",
     "Tin Can Of Latte": "A student's job is never without it's caffeine.",
     "Bandages": "Putting the boo! in boo boos."
