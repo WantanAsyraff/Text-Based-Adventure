@@ -20,7 +20,7 @@ class Player:
     def spellcast(self, enemy):
         print(f"\n📖 Which spell do you wish to conjure?\nTarget: {enemy}")
         for idx, (spell, desc) in enumerate(self.spellbook.items(), 1):
-            print(f" [{idx}] {spell} — {desc[0]} \n     Damage: {desc[1]}\n     Mana Cost: {desc[2]}")
+            print(f" [{idx}] {spell} — {desc[0]} \n     Damage: {desc[1]} Mana Cost: {desc[2]}")
 
         while True:
             try:
@@ -36,15 +36,17 @@ class Player:
                     if self.mana < codex_of_the_fools_spellblades[chosen_spell][2]:
                         print(">> You don't have the energy to cast this it.")
                     else:
-                        
                         self.mana -= self.spellbook[chosen_spell][2]
                         #attack enemy line
                         print(f">> You sucessfully casted {chosen_spell}")
-                        #return dmg to enemy
+                        total_damage = self.attack + self.spellbook[chosen_spell][1]
+                        print(f"Total damage: {total_damage}")
+                        return total_damage
+                    
             except ValueError:
-                print("Invalid input, use integers.")
+                print(f"Invalid input, choose from [1-{idx}].")
             except SyntaxError:
-                print("Invalid input, use integers.")
+                print(f"Invalid input, choose from [1-{idx}].")
 
     def use_item(self):
         print("\n🎒 Which item do you wish to use?\n")
@@ -60,9 +62,9 @@ class Player:
                     chosen_item = item_keys[choose_item - 1]
                     item_info = self.inventory[chosen_item]
             except ValueError:
-                print("Invalid input, use integers.")
+                print(f"Invalid input, choose from [1-{idx}].")
             except SyntaxError:
-                print("Invalid input, use integers.")
+                print(f"Invalid input, choose from [1-{idx}].")
 
     def check_environment(self):
         print("\n🌿 You take a moment to observe your surroundings...\n")
@@ -72,19 +74,18 @@ class Player:
         print("\n🗨️ You attempt to speak with your foe...\n")
         # To be implemented with branching dialogue or reaction system
 
-
+#These should go into a database later
 codex_of_the_fools_spellblades = {
-    # Spell, desc, DMG, Mana Cost
+    # Spell, desc-0, DMG-1, Mana Cost-2, Status effect-3(Soon)
     "Rend of Regret":["Send scars with multiples cuts from daggers.", 50, 35, ],
     "Moonlit Guillotine":["Strike fear into your opponent with a greatsword.", 60, 40, ],
     "Waltz Of Ignorances": ["Send a flurry of stabs using a rapier.", 30, 15, ]
 }    
 messenger_bag = {
-    # Item, dec, quantity, healing, damage(enemy), damage(player), 
+    # Item, desc-0, quantity-1, healing-2, damage(enemy)-3, damage(player)-4, HP(player)-5, HP(enemy)-6,
     "Pocket Watch": "The night is still young.",
     "Tin Can Of Latte": "A student's job is never without it's caffeine.",
     "Bandages": "Putting the boo! in boo boos."
     
 }
 amal_fakhri = Player("Amal Fakhri", "Researcher of Magis Al-Zalam", "There's no shame in obtaining knowledge.", "Magis AlNur-Walzalam", 200, 50, 75, 300, codex_of_the_fools_spellblades, messenger_bag)
-amal_fakhri.spellcast("Opps")
