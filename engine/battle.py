@@ -22,17 +22,20 @@ class Battle:
             print(f"[{idx}] {action}")
         
         print(f"--------------------------")
-        try:
-            choice = int(input(">> Your turn, what will you do?\n>> "))
-            
-            if 1 <= choice <= len(action_key):
-                chosen_action = action_key[choice-1]
-                print(f"\n>> You chose: {chosen_action}")
-                options[chosen_action]()
-        except ValueError:
-            print(f"Invalid input, choose from [1-{idx}].")
-        except SyntaxError:
-            print(f"Invalid input, choose from [1-{idx}].")
+        
+        while True:
+            try:
+                choice = int(input(">> Your turn, what will you do?\n>> "))
+                
+                if 1 <= choice <= len(action_key):
+                    chosen_action = action_key[choice-1]
+                    print(f"\n>> You chose: {chosen_action}")
+                    options[chosen_action]()
+                    return "Turn ended"
+            except ValueError:
+                print(f"Invalid input, choose from [1-{idx}].")
+            except SyntaxError:
+                print(f"Invalid input, choose from [1-{idx}].")
     
     def enemy_turn(self):
         pass

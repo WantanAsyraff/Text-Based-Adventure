@@ -13,3 +13,12 @@ class Enemy:
         self.atk = atk
         self.mana = mana
         self.spellbook = spellbook
+        
+    def attack_opponent(self, player):
+        return
+    
+    def flee():
+        return
+    
+    def use_item():
+        return
