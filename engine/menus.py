@@ -1,3 +1,5 @@
+import battle as bt
+
 class Menus:
     def __init__(self, title, player_options):
         self.title = title

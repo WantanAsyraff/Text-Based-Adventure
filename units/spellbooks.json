@@ -1,0 +1,30 @@
+{"codex_of_the_fools_spellblades_edition": {
+    "Rend of Regret": {
+        "description": "Send scars with multiples cuts from daggers.",
+        "archetype": "Al-Zalam",
+        "attack type": "melee",
+        "range": "close",
+        "damage": 50,
+        "mana cost": 35,
+        "effects": "none"
+    },
+    "Moonlit Guillotine": {
+        "description": "Strike fear into your opponent with a greatsword.",
+        "archetype": "Al-Zalam",
+        "attack type": "melee",
+        "range": "close",
+        "damage": 60,
+        "mana cost": 40,
+        "effects": "none"
+    },
+    "Waltz Of Ignorances": {
+        "description": "Send a flurry of stabs using a rapier.",
+        "archetype": "Al-Zalam",
+        "attack type": "melee",
+        "range": "close",
+        "damage": 30,
+        "mana cost": 15,
+        "effects": "none"
+    }
+  }
+}

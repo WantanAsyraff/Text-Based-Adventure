@@ -1,3 +1,7 @@
+from units import enemies
+import random as rd
+
+
 class Enemy:
     def __init__(
         self,name, desc, flavour, archetype, 
@@ -15,10 +19,14 @@ class Enemy:
         self.spellbook = spellbook
         
     def attack_opponent(self, player):
+        print(f">> {self.name} is about to attack")
+    
+    def use_ability(self):
+        return
+    
+    def use_item():
         return
     
     def flee():
         return
     
-    def use_item():
-        return

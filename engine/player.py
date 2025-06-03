@@ -1,3 +1,5 @@
+import json
+
 class Player:
     def __init__(
         self, name, desc, flavour, archetype,
@@ -18,28 +20,40 @@ class Player:
         self.inventory = inventory  # Dictionary of items
 
     def spellcast(self, enemy):
-        print(f"\n📖 Which spell do you wish to conjure?\nTarget: {enemy}")
-        for idx, (spell, desc) in enumerate(self.spellbook.items(), 1):
-            print(f" [{idx}] {spell} — {desc[0]} \n     Damage: {desc[1]} Mana Cost: {desc[2]}")
+        # Get from spellbooks.json and then parse
+        try:
+            with open("units/spellbooks.json", "r") as f:
+                codex = json.load(f)
+        except Exception as e:
+            print("\nInvalid input, error: ", e)
+            
+        spells = codex.get(self.spellbook)
+        spell_list = list(spells.keys())
+            
+        if not spells:
+            print("No spells found")
+        else:
+            print(f"\n📖 Which spell do you wish to conjure?\nTarget: {enemy}")
+            for idx, (spell, desc) in enumerate(spells.items(), 1):
+                print(f""" [{idx}] {spell} — {desc["description"]}
+                      \n   Damage: {desc["damage"]} | Mana Cost: {desc["mana cost"]}""")
 
         while True:
             try:
                 spellcasted = int(input("Spell Index: "))
                 
-                if 1 <= spellcasted <= len(self.spellbook):
-                    
-                    spell_keys = list(self.spellbook.keys())
-                    chosen_spell = spell_keys[spellcasted - 1]
-                    spell_info = self.spellbook[chosen_spell]
+                if 1 <= spellcasted <= len(spell_list):
+                    chosen_spell = spell_list[spellcasted - 1]
+                    spell_data = spells[chosen_spell]
                     
                     print(f">> You're casting: {chosen_spell}")
-                    if self.mana < codex_of_the_fools_spellblades[chosen_spell][2]:
+                    if self.mana < spell_data["mana cost"]:
                         print(">> You don't have the energy to cast this it.")
                     else:
-                        self.mana -= self.spellbook[chosen_spell][2]
+                        self.mana -= spell_data["mana cost"]
                         #attack enemy line
                         print(f">> You sucessfully casted {chosen_spell}")
-                        total_damage = self.attack + self.spellbook[chosen_spell][1]
+                        total_damage = self.attack + spell_data["damage"]
                         print(f"Total damage: {total_damage}")
                         return total_damage
                     
@@ -74,13 +88,7 @@ class Player:
         print("\n🗨️ You attempt to speak with your foe...\n")
         # To be implemented with branching dialogue or reaction system
 
-#These should go into a database later
-codex_of_the_fools_spellblades = {
-    # Spell, desc-0, DMG-1, Mana Cost-2, Status effect-3(Soon)
-    "Rend of Regret":["Send scars with multiples cuts from daggers.", 50, 35, ],
-    "Moonlit Guillotine":["Strike fear into your opponent with a greatsword.", 60, 40, ],
-    "Waltz Of Ignorances": ["Send a flurry of stabs using a rapier.", 30, 15, ]
-}    
+   
 messenger_bag = {
     # Item, desc-0, quantity-1, healing-2, damage(enemy)-3, damage(player)-4, HP(player)-5, HP(enemy)-6,
     "Pocket Watch": "The night is still young.",
@@ -88,4 +96,5 @@ messenger_bag = {
     "Bandages": "Putting the boo! in boo boos."
     
 }
-amal_fakhri = Player("Amal Fakhri", "Researcher of Magis Al-Zalam", "There's no shame in obtaining knowledge.", "Magis AlNur-Walzalam", 200, 50, 75, 300, codex_of_the_fools_spellblades, messenger_bag)
+amal_fakhri = Player("Amal Fakhri", "Researcher of Magis Al-Zalam", "There's no shame in obtaining knowledge.", "Magis AlNur-Walzalam", 200, 50, 75, 300, "codex_of_the_fools_spellblades_edition", messenger_bag)
+amal_fakhri.spellcast("opp")
