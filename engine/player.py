@@ -97,4 +97,4 @@ messenger_bag = {
     
 }
 amal_fakhri = Player("Amal Fakhri", "Researcher of Magis Al-Zalam", "There's no shame in obtaining knowledge.", "Magis AlNur-Walzalam", 200, 50, 75, 300, "codex_of_the_fools_spellblades_edition", messenger_bag)
-amal_fakhri.spellcast("opp")
+#amal_fakhri.spellcast("opp")
